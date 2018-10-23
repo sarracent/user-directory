@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListDirectorioTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="DirectorioListForm">
+                <p:panel header="#{bundle.ListDirectorioTitle}">
+                    <p:dataTable id="datalist" value="#{directorioController.items}" var="item"
+                                
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="20"
+                                 rowsPerPageTemplate="10,20,30,40,50" editMode="true"  editable="true"
+                                 >
+
+                        <p:ajax event="rowSelect"   update=""/>
+                        <p:ajax event="rowUnselect" update=""/>
+
+                       
+                        <p:column filterBy="#{item.usuario}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDirectorioTitle_usuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usuario}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.nombre}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDirectorioTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.correo}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDirectorioTitle_correo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.correo}"/>
+                        </p:column>
+                    
+                      
+                       
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>
